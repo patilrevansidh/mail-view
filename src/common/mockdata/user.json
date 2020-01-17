@@ -1,0 +1,41 @@
+[
+  {
+    "email": "patilrevansiddh@gmail.com",
+    "password": "patilrevansiddh",
+    "name": "Revansiddh",
+    "contacts": [
+      "patilrevansiddh1@gmail.com",
+      "patilrevansiddh2@gmail.com",
+      "abhilashpatil@gmail.com"
+    ]
+  },
+  {
+    "email": "patilrevansiddh1@gmail.com",
+    "password": "patilrevansiddh1",
+    "name": "Revansiddh 1",
+    "contacts": [
+      "patilrevansiddh1@gmail.com",
+      "patilrevansiddh2@gmail.com",
+      "abhilashpatil@gmail.com"
+    ]
+  },
+  {
+    "email": "patilrevansiddh2@gmail.com",
+    "password": "patilrevansiddh2",
+    "name": "Revansiddh 2",
+    "contacts": [
+      "patilrevansiddh1@gmail.com",
+      "abhilashpatil@gmail.com"
+
+    ]
+  },
+  {
+    "email": "abhilashpatil@gmail.com",
+    "password": "abhilashpatil",
+    "name": "Abhilash Patil",
+    "contacts": [
+      "patilrevansiddh1@gmail.com",
+      "abhilashpatil@gmail.com"
+    ]
+  }
+]
