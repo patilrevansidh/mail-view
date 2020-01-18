@@ -1,4 +1,5 @@
 import users from '../mockdata/user.json';
+import { ERRORS } from '../constants/index.js';
 
 export class AuthService {
 
@@ -8,7 +9,7 @@ export class AuthService {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         if (!user) {
-          reject()
+          reject(ERRORS.INVALID_CREDENTIAL)
         }
         resolve(user)
       }, 500);
