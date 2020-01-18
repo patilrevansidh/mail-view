@@ -61,3 +61,9 @@ export const FORM_LAYOUTS = {
 export const IMP_KEYS = {
   AUTH_STORAGE_KEYS: 'loggedIn'
 }
+
+export const CONSTANTS = {
+  LARGE: 'large',
+  SMALL: 'small',
+  DEFAULT: 'default',
+}

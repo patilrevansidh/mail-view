@@ -1,13 +1,15 @@
 import React from 'react';
-import { Layout, Menu, Icon, } from 'antd';
+import { Layout, Menu, Icon, Badge, } from 'antd';
 import { HashRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom';
 import LoginContainer from '../views/Auth/LoginContainer';
 import EmailContainer from '../views/Email/EmailContainer';
-import { ROUTE_PATH, SIDE_BAR, IMP_KEYS } from '../common/constants/index';
+import { ROUTE_PATH, SIDE_BAR, CONSTANTS } from '../common/constants/index';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
 import { connect } from 'react-redux';
+import { AntdIcon } from '../common/components'
+import { onLogOut } from '../views/Auth/action/auth-action';
 
 const { Header, Sider, Content } = Layout;
 export class PrivateRoute extends React.PureComponent {
@@ -17,6 +19,10 @@ export class PrivateRoute extends React.PureComponent {
   toggle = () => {
     this.setState({ collapsed: !this.state.collapsed });
   };
+
+  handleLogout = () => {
+    this.props.onLogOut()
+  }
 
   renderSidebar = () => <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
     <div className="logo" />
@@ -54,12 +60,19 @@ export class PrivateRoute extends React.PureComponent {
     </Menu>
   </Sider>;
 
-  renderHeader = () => <Header style={{ background: '#fff', padding: 0 }}>
-    <Icon className="trigger" type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.toggle} />
+  renderHeader = () => <Header style={{ background: '#fff', paddingLeft: 24 }}>
+    <AntdIcon size={CONSTANTS.LARGE} type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.toggle} />
+    <span style={{ float: 'right' }}>
+      <Badge count={5}>
+        <AntdIcon size={CONSTANTS.DEFAULT} type='mail' />
+      </Badge>
+      <span style={{ paddingLeft: '1.5rem', cursor: 'pointer' }} onClick={this.handleLogout} >
+        <AntdIcon type="logout" size={CONSTANTS.DEFAULT} /> Log out
+      </span>
+    </span>
   </Header>;
 
   render() {
-    const isLoggedLocal = localStorage.getItem(IMP_KEYS.AUTH_STORAGE_KEYS);
     const { user: { isLoggedIn = false }, path, component } = this.props
     if (!isLoggedIn) {
       return <Redirect to='/login' />
@@ -72,17 +85,21 @@ export class PrivateRoute extends React.PureComponent {
         component={() => {
           return <Layout>
             {this.renderSidebar()}
-            {this.renderHeader()}
-            <Content
-              style={{
-                margin: '24px 16px',
-                padding: 24,
-                background: '#fff',
-                minHeight: 280,
-              }}
-            >
-              <ComponentView {...this.props} />
-            </Content>
+            <div style={{ width: '100%' }}>
+              {this.renderHeader()}
+
+              <Content
+                style={{
+                  margin: '24px 16px',
+                  padding: 24,
+                  background: '#fff',
+                  minHeight: 280,
+                  height: '85%'
+                }}
+              >
+                <ComponentView {...this.props} />
+              </Content>
+            </div>
           </Layout>
         }}
       />
@@ -90,12 +107,6 @@ export class PrivateRoute extends React.PureComponent {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    user: state.user
-  }
-}
-const PrivateRoutes = connect(mapStateToProps)(PrivateRoute);
 export class App extends React.PureComponent {
   render() {
     return (
@@ -114,3 +125,16 @@ export class App extends React.PureComponent {
     )
   }
 }
+
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+const mapDispatchToProps = dispatchEvent => {
+  return {
+    onLogOut: () => dispatchEvent(onLogOut())
+  }
+}
+
+const PrivateRoutes = connect(mapStateToProps, mapDispatchToProps)(PrivateRoute);

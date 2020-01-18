@@ -1,4 +1,4 @@
-import { LOGIN } from '../action/auth-action';
+import { LOGIN, LOG_OUT } from '../action/auth-action';
 import { REHYDRATE } from 'redux-persist';
 
 
@@ -21,6 +21,11 @@ export const authReducer = (state = initalState, action) => {
         ...state,
         ...action.payload,
         isLoggedIn: true
+      }
+
+    case LOG_OUT:
+      return {
+        isLoggedIn: false
       }
 
     default:
