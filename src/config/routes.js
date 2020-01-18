@@ -3,7 +3,9 @@ import { Layout, Menu, Icon, } from 'antd';
 import { HashRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom';
 import LoginContainer from '../views/Auth/LoginContainer';
 import EmailContainer from '../views/Email/EmailContainer';
-import { ROUTE_PATH, SIDE_BAR } from '../common/constants/index';
+import { ROUTE_PATH, SIDE_BAR, IMP_KEYS } from '../common/constants/index';
+import { Provider } from 'react-redux';
+import { store } from './store';
 
 const { Header, Sider, Content } = Layout;
 export class PrivateRoutes extends React.PureComponent {
@@ -55,7 +57,7 @@ export class PrivateRoutes extends React.PureComponent {
   </Header>;
 
   render() {
-    const isLoggedIn = localStorage.getItem('loggedIn');
+    const isLoggedIn = localStorage.getItem(IMP_KEYS.AUTH_STORAGE_KEYS);
     if (!isLoggedIn || isLoggedIn !== 'true') {
       return <Redirect to='/login' />
     }
@@ -89,12 +91,14 @@ export class App extends React.PureComponent {
   render() {
     return (
       <Layout style={{ height: '100%' }}>
-        <Router basename={ROUTE_PATH.BASE}>
-          <Switch>
-            <Route path={ROUTE_PATH.AUTH} component={LoginContainer} />
-            <PrivateRoutes path={ROUTE_PATH.BASE} component={EmailContainer} />
-          </Switch>
-        </Router>
+        <Provider store={store}>
+          <Router basename={ROUTE_PATH.BASE}>
+            <Switch>
+              <Route path={ROUTE_PATH.AUTH} component={LoginContainer} />
+              <PrivateRoutes path={ROUTE_PATH.BASE} component={EmailContainer} />
+            </Switch>
+          </Router>
+        </Provider>
       </Layout>
     )
   }

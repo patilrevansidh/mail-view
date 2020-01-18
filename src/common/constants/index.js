@@ -57,3 +57,7 @@ export const FORM_LAYOUTS = {
     },
   }
 }
+
+export const IMP_KEYS = {
+  AUTH_STORAGE_KEYS: 'loggedIn'
+}
