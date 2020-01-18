@@ -34,6 +34,10 @@
 
   .email-list-container {
     background-color:$app-white;
+    padding: 1rem;
     height: 100%;
+    .search-container{
+      float: right;
+    }
   }
 }

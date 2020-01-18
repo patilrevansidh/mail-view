@@ -1,6 +1,7 @@
+import { Button, Col, Layout, Row } from 'antd';
 import React from 'react';
-import { Layout, Row, Col, Tabs, Button } from 'antd';
 import { AntdIcon } from '../../../common/components';
+import EmailList from './email-list';
 import '../styles/dashboard.scss';
 
 // const { TabPane } = Tabs;
@@ -8,7 +9,13 @@ const EMAIL_PANELS = [
   { NAME: 'Inbox', KEY: '1', ICON: 'inbox' },
   { NAME: 'Sent', KEY: '2', ICON: 'mail' },
   { NAME: 'Trash', KEY: '3', ICON: 'delete' },
-]
+];
+
+const EMAIL_LIST_TYPE = {
+  INBOX: 'Inbox',
+  SENT: 'Sent',
+  TRASH: 'Trash'
+}
 
 class EmailDashboard extends React.PureComponent {
 
@@ -20,7 +27,7 @@ class EmailDashboard extends React.PureComponent {
     const { activeKey } = this.state;
     switch (activeKey) {
       case '1':
-        return 'Inbox';
+        return <EmailList type={EMAIL_LIST_TYPE.INBOX} />;
 
       case '2':
         return 'Sent';
@@ -42,7 +49,7 @@ class EmailDashboard extends React.PureComponent {
           <Col xs={4}>
             <Row gutter={[8, 16]}>
               <Col xs={24} md={24} className='compose-button-container'>
-                <Button  className='compose-button' block='large'>
+                <Button className='compose-button' block='large'>
                   Compose
                 </Button>
               </Col>

@@ -1,0 +1,11 @@
+@import '../styles/variable.scss';
+
+.header-title {
+  color: $app-font-color;
+  font-weight: $default-font-weight;
+  font-size: 2rem;
+}
+.primary-button{
+  background-color: $primary-color;
+  color: $app-white;
+}
