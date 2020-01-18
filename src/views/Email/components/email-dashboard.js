@@ -1,8 +1,9 @@
 import React from 'react';
-import { Layout, Row, Col, Tabs, Icon } from 'antd';
+import { Layout, Row, Col, Tabs, Button } from 'antd';
+import { AntdIcon } from '../../../common/components';
 import '../styles/dashboard.scss';
 
-const { TabPane } = Tabs;
+// const { TabPane } = Tabs;
 const EMAIL_PANELS = [
   { NAME: 'Inbox', KEY: '1', ICON: 'inbox' },
   { NAME: 'Sent', KEY: '2', ICON: 'mail' },
@@ -32,31 +33,33 @@ class EmailDashboard extends React.PureComponent {
     }
   }
 
-  renderTabs = () => {
-    return <Tabs onChange={this.handleTabChange} className='email-sidebar'
-      defaultActiveKey='1' tabPosition={this.state.mode}
-      style={{ height: '100%', textAlign: 'left' }}>
-      {
-        EMAIL_PANELS.map(panel => {
-          const { ICON, NAME, KEY } = panel;
-          const tabName = <span>
-            {ICON && <Icon type={ICON} />}
-            {NAME}
-          </span>;
-          return <TabPane tab={tabName} key={KEY}>
-            <div className='email-list-conainer'>
-              {this.renderTabsDetails()}
-            </div>
-          </TabPane>
-        })
-      }
-    </Tabs>
-  }
+  handleClick = (activeKey) => this.setState({ activeKey });
 
   render() {
     return (
       <Layout style={{ height: '100%' }}>
-        {this.renderTabs()}
+        <Row className='email-container'>
+          <Col xs={4}>
+            <Row gutter={[8, 16]}>
+              <Col xs={24} md={24} className='compose-button-container'>
+                <Button  className='compose-button' block='large'>
+                  Compose
+                </Button>
+              </Col>
+              {
+                EMAIL_PANELS.map(item => <Col xs={24} md={24} className='menu-item-container'>
+                  <span onClick={() => this.handleClick(item.KEY)} className='email-menu-item'>
+                    {item.ICON && <AntdIcon className='menu-icon' size='large' type={item.ICON} />}
+                    <span className='menu-item-label'>{item.NAME}</span>
+                  </span>
+                </Col>)
+              }
+            </Row>
+          </Col>
+          <Col xs={20} className='email-list-container'>
+            {this.renderTabsDetails()}
+          </Col>
+        </Row>
       </Layout>
     );
   }

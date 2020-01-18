@@ -1,10 +1,39 @@
-.email-sidebar {
-  .ant-tabs-tab {
-    text-align: left !important;
+@import '../../../common/styles/variable.scss';
+
+.email-container {
+  height: 100%;
+  padding: 1rem;
+
+  .compose-button-container {
+    text-align: center;
+    width: 80%;
+
+    .compose-button {
+      background-color: $primary-color;
+      color: $app-white;
+      margin: 0.5rem 1rem;
+    }
   }
 
-  .ant-tabs-content-animated.ant-tabs-left-content {
-    background-color: white;
+  .menu-item-container {
+    border-bottom: 1px solid $app-border-gray;    
+    .email-menu-item {
+      width: 100%;
+      padding-left: 1.5rem;
+      cursor: pointer;
+
+      .menu-icon {
+        padding-right: .75rem;
+      }
+
+      .menu-item-label {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .email-list-container {
+    background-color:$app-white;
     height: 100%;
   }
 }

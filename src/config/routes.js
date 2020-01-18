@@ -87,8 +87,7 @@ export class PrivateRoute extends React.PureComponent {
             {this.renderSidebar()}
             <div style={{ width: '100%' }}>
               {this.renderHeader()}
-
-              <Content style={{ height: '85%' }}>
+              <Content style={{ height: '90%' }}>
                 <ComponentView {...this.props} />
               </Content>
             </div>
