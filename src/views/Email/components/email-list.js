@@ -5,10 +5,11 @@ const { Search } = Input;
 
 class EmailListView extends Component {
   render() {
+    const { type } = this.props;
     return (
-      <div className>
+      <div>
         <span>
-          <AppTitle title='Inbox (5)' />
+          <AppTitle title={`${type} (5)`} />
           <span className='search-container'>
             <Search
               placeholder="input search text"

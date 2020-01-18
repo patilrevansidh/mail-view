@@ -67,3 +67,12 @@ export const CONSTANTS = {
   SMALL: 'small',
   DEFAULT: 'default',
 }
+
+export const INPUT_PLACEHOLDER = {
+  PASSWORD: 'Enter Password',
+  EMAIL: 'Enter email',
+  TO: 'Enter email to whom',
+  CC: 'Enter email to whom',
+  SUBJECT: 'Enter Subject',
+  BODY: 'Enter Body'
+}

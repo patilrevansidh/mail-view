@@ -1,11 +1,18 @@
 import React, { Component } from 'react';
 import EmailComponent from './components/email-dashboard';
+import { connect } from 'react-redux';
+
 class EmailContainer extends Component {
   render() {
-    return (      
-        <EmailComponent />      
+    const { user } = this.props;    
+    return (
+      <EmailComponent user={user} />
     );
   }
 }
-
-export default EmailContainer;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+export default connect(mapStateToProps)(EmailContainer);
