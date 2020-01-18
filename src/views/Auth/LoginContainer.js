@@ -8,12 +8,9 @@ import { withRouter, Redirect } from 'react-router-dom';
 import { IMP_KEYS } from '../../common/constants';
 
 class LoginContainer extends Component {
-
+  
   authService = new AuthService()
-  state = {
-    loader: false,
-    serverError: null
-  }
+  state = { loader: false, serverError: null }
 
   onLogin = async (payload) => {
     try {
@@ -23,10 +20,10 @@ class LoginContainer extends Component {
       login(userInfo);
       history.push('/');
     } catch (error) {
-      console.log('**', error)
       this.setState({ serverError: error });
     }
   }
+
   render() {
     const { user: { isLoggedIn = false } } = this.props;
     if (isLoggedIn) {
