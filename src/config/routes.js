@@ -88,7 +88,7 @@ export class PrivateRoutes extends React.PureComponent {
 export class App extends React.PureComponent {
   render() {
     return (
-      <Layout>
+      <Layout style={{ height: '100%' }}>
         <Router basename={ROUTE_PATH.BASE}>
           <Switch>
             <Route path={ROUTE_PATH.AUTH} component={LoginContainer} />
