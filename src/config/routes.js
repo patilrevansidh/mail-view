@@ -5,10 +5,12 @@ import LoginContainer from '../views/Auth/LoginContainer';
 import EmailContainer from '../views/Email/EmailContainer';
 import { ROUTE_PATH, SIDE_BAR, IMP_KEYS } from '../common/constants/index';
 import { Provider } from 'react-redux';
-import { store } from './store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { store, persistor } from './store';
+import { connect } from 'react-redux';
 
 const { Header, Sider, Content } = Layout;
-export class PrivateRoutes extends React.PureComponent {
+export class PrivateRoute extends React.PureComponent {
 
   state = { collapsed: false }
 
@@ -57,12 +59,13 @@ export class PrivateRoutes extends React.PureComponent {
   </Header>;
 
   render() {
-    const isLoggedIn = localStorage.getItem(IMP_KEYS.AUTH_STORAGE_KEYS);
-    if (!isLoggedIn || isLoggedIn !== 'true') {
+    const isLoggedLocal = localStorage.getItem(IMP_KEYS.AUTH_STORAGE_KEYS);
+    const { user: { isLoggedIn = false }, path, component } = this.props
+    if (!isLoggedIn) {
       return <Redirect to='/login' />
     }
-    const { path, component } = this.props;
     const ComponentView = component;
+
     return (
       <Route
         path={path}
@@ -87,17 +90,25 @@ export class PrivateRoutes extends React.PureComponent {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  }
+}
+const PrivateRoutes = connect(mapStateToProps)(PrivateRoute);
 export class App extends React.PureComponent {
   render() {
     return (
       <Layout style={{ height: '100%' }}>
         <Provider store={store}>
-          <Router basename={ROUTE_PATH.BASE}>
-            <Switch>
-              <Route path={ROUTE_PATH.AUTH} component={LoginContainer} />
-              <PrivateRoutes path={ROUTE_PATH.BASE} component={EmailContainer} />
-            </Switch>
-          </Router>
+          <PersistGate loading={null} persistor={persistor}>
+            <Router basename={ROUTE_PATH.BASE}>
+              <Switch>
+                <PrivateRoutes exact path={ROUTE_PATH.BASE} component={EmailContainer} />
+                <Route exact path={ROUTE_PATH.AUTH} component={LoginContainer} />
+              </Switch>
+            </Router>
+          </PersistGate>
         </Provider>
       </Layout>
     )

@@ -19,18 +19,17 @@ class LoginContainer extends Component {
     try {
       const userInfo = await this.authService.login(payload);
       const { login, history } = this.props;
+      localStorage.setItem(IMP_KEYS.AUTH_STORAGE_KEYS, true)
       login(userInfo);
       history.push('/');
-      localStorage.setItem(IMP_KEYS.AUTH_STORAGE_KEYS)
     } catch (error) {
-      // console.log('*****', error)
+      console.log('**', error)
       this.setState({ serverError: error });
     }
   }
   render() {
     const { user: { isLoggedIn = false } } = this.props;
-    const isLoggedInPrev = localStorage.getItem(IMP_KEYS.AUTH_STORAGE_KEYS);
-    if (isLoggedIn || isLoggedInPrev) {
+    if (isLoggedIn) {
       return <Redirect to='/' />
     }
     return (
@@ -42,11 +41,13 @@ class LoginContainer extends Component {
     );
   }
 }
+
 const mapStateToProps = state => {
   return {
     user: state.user
   }
 }
+
 const mapDispatchToProps = dispatchEvent => {
   return {
     login: payload => dispatchEvent(onLogin(payload))
