@@ -1,7 +1,6 @@
 import { LOGIN, LOG_OUT } from '../action/auth-action';
 import { REHYDRATE } from 'redux-persist';
 
-
 const initalState = {
   isLoggedIn: false
 }

@@ -88,15 +88,7 @@ export class PrivateRoute extends React.PureComponent {
             <div style={{ width: '100%' }}>
               {this.renderHeader()}
 
-              <Content
-                style={{
-                  margin: '24px 16px',
-                  padding: 24,
-                  background: '#fff',
-                  minHeight: 280,
-                  height: '85%'
-                }}
-              >
+              <Content style={{ height: '85%' }}>
                 <ComponentView {...this.props} />
               </Content>
             </div>
