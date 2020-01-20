@@ -33,11 +33,24 @@
   }
 
   .email-list-container {
-    background-color:$app-white;
-    padding: 1rem;
+    background-color:$app-white;    
     height: 100%;
-    .search-container{
-      float: right;
+    .email-list-header{
+      padding: 1rem 0 0 1rem;
+      .search-container{
+        float: right;
+        padding-top: 1rem;
+      }
+    }
+    .email-first-list-item{
+      padding: 10px 1rem;
+      border-bottom: 1px solid $app-border-gray;   
+      border-top: 1px solid $app-border-gray;   
+      margin-top: 1rem;
+    }
+    .email-list-item{
+      padding: 10px 1rem;
+      border-bottom: 1px solid $app-border-gray;   
     }
   }
 }

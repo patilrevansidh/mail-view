@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import EmailComponent from './components/email-dashboard';
 import { onEmailSend } from './action/email-actions';
 import { connect } from 'react-redux';
+import MailListing from './components/email-list';
 class EmailContainer extends Component {
 
   handleSendEmail = (payload) => {
@@ -9,9 +10,10 @@ class EmailContainer extends Component {
   }
 
   render() {
-    const { user } = this.props;
+    const { user = {}, userEmail = {} } = this.props;
     return (
       <EmailComponent
+        userEmail={userEmail}
         onSend={this.handleSendEmail}
         user={user} />
     );
@@ -19,8 +21,11 @@ class EmailContainer extends Component {
 }
 
 const mapStateToProps = state => {
+  const currentUser = state.user || {};
+  console.log('***',state.email[currentUser.mail])
   return {
-    user: state.user
+    user: currentUser,
+    userEmail: (currentUser && state.email) && state.email[currentUser.email] || { sent: [], inbox: [], trash: [] }
   }
 }
 

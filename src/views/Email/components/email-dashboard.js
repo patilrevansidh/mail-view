@@ -29,8 +29,11 @@ class EmailDashboard extends React.PureComponent {
 
   renderTabsDetails = () => {
     const { activeKey } = this.state;
+    const { userEmail } = this.props;
     const emailPanel = EMAIL_PANELS.find((i) => i.KEY === activeKey);
-    return <EmailList type={emailPanel.NAME} />;
+    return <EmailList
+      userEmail={userEmail}
+      type={emailPanel.NAME} />;
   }
 
   render() {
