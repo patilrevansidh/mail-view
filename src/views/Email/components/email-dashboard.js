@@ -1,9 +1,9 @@
-import { Button, Col, Layout, Row } from 'antd';
+import { Col, Layout, Row } from 'antd';
 import React from 'react';
 import { AntdIcon, PrimaryButton } from '../../../common/components';
+import '../styles/dashboard.scss';
 import EmailCompose from './email-compose';
 import EmailList from './email-list';
-import '../styles/dashboard.scss';
 
 // const { TabPane } = Tabs;
 const EMAIL_PANELS = [
@@ -29,7 +29,7 @@ class EmailDashboard extends React.PureComponent {
   }
 
   render() {
-    const { user: { contacts = [] } } = this.props;
+    const { user: { contacts = [], email = '' } } = this.props;
     const { showCompose } = this.state;
     return (
       <Layout style={{ height: '100%' }}>
@@ -52,6 +52,8 @@ class EmailDashboard extends React.PureComponent {
           <Col xs={20} className='email-list-container'>
             {this.renderTabsDetails()}
             <EmailCompose
+              onSend={this.props.onSend}
+              from={email}
               contacts={contacts}
               onToggleCompose={this.handleCompose}
               visible={showCompose} />

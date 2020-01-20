@@ -5,9 +5,11 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import autoMergeLevel2 from 'redux-persist/lib/stateReconciler/autoMergeLevel2';
+import { emailReducers } from '../views/Email/reducer/email-reducer.js';
 
 const rootReducer = combineReducers({
-  user: authReducer
+  user: authReducer,
+  email: emailReducers,
 })
 
 const persistConfig = {

@@ -1,4 +1,5 @@
 import { DELETE_EMAIL, SEND_EMAIL } from '../action/email-actions';
+import { updateUserMailOnSend } from '../helper/emailHelper';
 import { REHYDRATE } from 'redux-persist';
 
 export const emailReducers = (state = {}, action) => {
@@ -7,10 +8,11 @@ export const emailReducers = (state = {}, action) => {
       const { payload = { user: { isLoggedIn: false } } } = action
       return {
         ...state,
-        ...payload.emails,
+        ...payload.email,
       };
     case SEND_EMAIL:
-      return state;
+      const updatesMailServer = updateUserMailOnSend(state, action.payload)
+      return updatesMailServer;
 
     default:
       return state;

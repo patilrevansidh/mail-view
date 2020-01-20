@@ -17,7 +17,11 @@ class EmailComposer extends React.PureComponent {
     body: ''
   }
 
-  handleOk = () => { this.props.onToggleCompose() }
+  handleOk = () => {
+    const { from = '' } = this.props;
+    const payload = { ...this.state, from }    
+    this.props.onSend(payload)
+  }
 
   handleEmailChange = (email, type) => {
     this.setState({ [type]: email });
@@ -39,6 +43,10 @@ class EmailComposer extends React.PureComponent {
     this.setState({ [name]: value });
   }
 
+  isEmailFormValid = () => {
+    const { to, cc, subject, body } = this.state;
+    return (!to.length || !cc.length || !subject || !body)
+  }
 
   render() {
     const { contacts = [] } = this.props;
@@ -47,6 +55,7 @@ class EmailComposer extends React.PureComponent {
         title="New Message"
         visible={this.props.visible}
         onOk={this.handleOk}
+        okButtonProps={{ disabled: this.isEmailFormValid() }}
         okText='Send'
         onCancel={this.props.onToggleCompose}
       >
