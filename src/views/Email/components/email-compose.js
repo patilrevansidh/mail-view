@@ -20,7 +20,7 @@ class EmailComposer extends React.PureComponent {
   handleOk = () => {
     const { from = '' } = this.props;
     const payload = { ...this.state, from }    
-    this.props.onSend(payload)
+    this.props.onSend(payload)    
   }
 
   handleEmailChange = (email, type) => {
@@ -45,7 +45,7 @@ class EmailComposer extends React.PureComponent {
 
   isEmailFormValid = () => {
     const { to, cc, subject, body } = this.state;
-    return (!to.length || !cc.length || !subject || !body)
+    return (!to.length  || !subject || !body)
   }
 
   render() {

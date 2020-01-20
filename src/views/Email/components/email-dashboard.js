@@ -22,6 +22,11 @@ class EmailDashboard extends React.PureComponent {
 
   handleCompose = () => this.setState({ showCompose: !this.state.showCompose });
 
+  handleSend = (payload) => {
+    this.handleCompose()
+    this.props.onSend(payload)
+  }
+
   renderTabsDetails = () => {
     const { activeKey } = this.state;
     const emailPanel = EMAIL_PANELS.find((i) => i.KEY === activeKey);
@@ -51,12 +56,14 @@ class EmailDashboard extends React.PureComponent {
           </Col>
           <Col xs={20} className='email-list-container'>
             {this.renderTabsDetails()}
-            <EmailCompose
-              onSend={this.props.onSend}
-              from={email}
-              contacts={contacts}
-              onToggleCompose={this.handleCompose}
-              visible={showCompose} />
+            {
+              showCompose && <EmailCompose
+                onSend={this.handleSend}
+                from={email}
+                contacts={contacts}
+                onToggleCompose={this.handleCompose}
+                visible={showCompose} />
+            }
           </Col>
         </Row>
       </Layout>
