@@ -25,7 +25,12 @@ export function deleteEmail(state, payload) {
   const { email = '', type = '', selected = [] } = payload;
   if (!state || !state[email]) return state;
   const userEmails = state[email] || { sent: [], trash: [], inbox: [] }
-  userEmails[type] = userEmails[type].filter(i => !selected.includes(i.id));
+  if (type !== 'trash') {
+    userEmails['trash'] = [...userEmails['trash'], ...userEmails[type].filter(i => selected.includes(i.id))]
+    userEmails[type] = userEmails[type].filter(i => !selected.includes(i.id));
+  } else {
+    userEmails[type] = userEmails[type].filter(i => !selected.includes(i.id));
+  }
   return {
     ...state,
     [email]: userEmails
