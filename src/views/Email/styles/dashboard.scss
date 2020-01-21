@@ -1,4 +1,4 @@
-@import '../../../common/styles/variable.scss';
+@import "../../../common/styles/variable.scss";
 
 .email-container {
   height: 100%;
@@ -16,14 +16,14 @@
   }
 
   .menu-item-container {
-    border-bottom: 1px solid $app-border-gray;    
+    border-bottom: 1px solid $app-border-gray;
     .email-menu-item {
       width: 100%;
       padding-left: 1.5rem;
       cursor: pointer;
 
       .menu-icon {
-        padding-right: .75rem;
+        padding-right: 0.75rem;
       }
 
       .menu-item-label {
@@ -33,24 +33,28 @@
   }
 
   .email-list-container {
-    background-color:$app-white;    
+    background-color: $app-white;
     height: 100%;
-    .email-list-header{
+    .action-button-container {
+      margin-top: 0.5rem;
+      margin-bottom: 0.5rem;
+    }
+    .email-list-header {
       padding: 1rem 0 0 1rem;
-      .search-container{
+      .search-container {
         float: right;
         padding-top: 1rem;
       }
     }
-    .email-first-list-item{
+    .email-first-list-item {
       padding: 10px 1rem;
-      border-bottom: 1px solid $app-border-gray;   
-      border-top: 1px solid $app-border-gray;   
+      border-bottom: 1px solid $app-border-gray;
+      border-top: 1px solid $app-border-gray;
       margin-top: 1rem;
     }
-    .email-list-item{
+    .email-list-item {
       padding: 10px 1rem;
-      border-bottom: 1px solid $app-border-gray;   
+      border-bottom: 1px solid $app-border-gray;
     }
   }
 }

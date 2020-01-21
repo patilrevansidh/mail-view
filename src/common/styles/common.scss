@@ -1,6 +1,18 @@
-@import './variable.scss';
+@import "./variable.scss";
 
-.ant-btn-primary{
+.ant-btn-primary {
   background-color: $primary-color !important;
   border-color: $primary-color !important;
+}
+.padding-right-1rem {
+  padding-right: 1rem;
+}
+.padding-1rem {
+  padding: 0.5rem;
+}
+.app-border {
+  border: 1px solid $app-border-gray !important;
+}
+.margin-right-05rem {
+  margin-right: 0.5rem;
 }

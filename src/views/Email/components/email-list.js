@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { AppTitle, AntdIcon } from '../../../common/components';
+import { AppTitle, AntdIcon, PrimaryButton } from '../../../common/components';
 import { CONSTANTS } from '../../../common/constants/index';
 import { EmailListItem } from './email-view';
 import { Input, Row, Col, Checkbox } from 'antd';
@@ -16,44 +16,57 @@ class EmailListView extends Component {
   }
 
   renderActionButton = () => {
-    return <Row>
-      <Col xs={6}>
+    const { onDelete, onMarkAsRead } = this.props;
+    return <Row type="flex" justify="space-around" align="middle">
+      <Col xs={3}>
+        <PrimaryButton> Refresh </PrimaryButton>
       </Col>
       <Col xs={10}>
-        <span>
-          <AntdIcon type='delete' size={CONSTANTS.DEFAULT} />
-          <AntdIcon type='eye' size={CONSTANTS.DEFAULT} />
+        <span >
+          <span className='app-border padding-1rem margin-right-05rem'>
+            <AntdIcon onClick={onDelete} type='delete' size={CONSTANTS.DEFAULT} />
+          </span>
+          <span className='app-border padding-1rem'>
+            <AntdIcon onClick={onMarkAsRead} type='eye' size={CONSTANTS.DEFAULT} />
+          </span>
         </span>
       </Col>
       <Col xs={8}>
+        aslda
       </Col>
     </Row>
   }
 
   render() {
-    const { type } = this.props;
+    const { type, onSelect, onView } = this.props;
     const emails = this.getEmailList();
     const title = type + (emails.length > 0 ? ` (${emails.length})` : '');
     return (
       <div>
-        <span className='email-list-header'>
-          <AppTitle title={title} />
-          <span className='search-container'>
-            <Search
-              placeholder="input search text"
-              enterButton="Search"
-              size="large"
-              onSearch={value => console.log(value)}
-            />
+        <div>
+          <span className='email-list-header'>
+            <AppTitle title={title} />
+            <span className='search-container'>
+              <Search
+                placeholder="input search text"
+                enterButton="Search"
+                size="large"
+                onSearch={value => console.log(value)}
+              />
+            </span>
           </span>
-        </span>
-        {this.renderActionButton()}
+        </div>
+        <div >
+          {this.renderActionButton()}
+        </div>
         <div>
           {
-            emails.map((mail, index) => <EmailListItem first={index === 0} mail={mail} />)
+            emails.map((mail, index) => <EmailListItem
+              onView={onView} onSelect={onSelect}
+              first={index === 0} mail={mail} />)
           }
         </div>
-      </div>
+      </div >
     );
   }
 }

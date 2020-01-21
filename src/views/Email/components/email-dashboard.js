@@ -14,7 +14,7 @@ const EMAIL_PANELS = [
 
 class EmailDashboard extends React.PureComponent {
 
-  state = { mode: 'left', activeKey: '1', showCompose: false }
+  state = { mode: 'left', activeKey: '1', showCompose: false, selected: [] }
 
   handleTabChange = (activeKey) => this.setState({ activeKey });
 
@@ -26,12 +26,33 @@ class EmailDashboard extends React.PureComponent {
     this.handleCompose()
     this.props.onSend(payload)
   }
+  handleDelete = () => {
+    console.log('handleDelete', this.state.selected)
+  }
+
+  handleMarkAsRead = () => {
+    console.log('handleMarkAsRead', this.state.selected)
+  }
+
+  handleSelection = (id) => {
+    let { selected = [] } = this.state;
+    if (selected.includes(id)) {
+      selected = selected.filter(i => i !== id);
+      this.setState({ selected });
+      return;
+    }
+    this.setState({ selected: [...selected, id] });
+  }
 
   renderTabsDetails = () => {
     const { activeKey } = this.state;
     const { userEmail } = this.props;
     const emailPanel = EMAIL_PANELS.find((i) => i.KEY === activeKey);
     return <EmailList
+      onView={this.handleView}
+      onSelect={this.handleSelection}
+      onDelete={this.handleDelete}
+      onMarkAsRead={this.handleMarkAsRead}
       userEmail={userEmail}
       type={emailPanel.NAME} />;
   }

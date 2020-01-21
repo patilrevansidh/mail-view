@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import EmailComponent from './components/email-dashboard';
-import { onEmailSend } from './action/email-actions';
 import { connect } from 'react-redux';
-import MailListing from './components/email-list';
+import { onEmailSend } from './action/email-actions';
+import EmailComponent from './components/email-dashboard';
 class EmailContainer extends Component {
 
   handleSendEmail = (payload) => {
