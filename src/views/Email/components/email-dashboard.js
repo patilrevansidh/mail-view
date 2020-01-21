@@ -26,12 +26,18 @@ class EmailDashboard extends React.PureComponent {
     this.handleCompose()
     this.props.onSend(payload)
   }
-  handleDelete = () => {
-    console.log('handleDelete', this.state.selected)
+  handleDelete = (type) => {
+    const { user: { email = '' } } = this.props;
+    const payload = { email, type, selected: this.state.selected }
+    this.props.onDelete(payload);
+    this.setState({ selected: [] });
   }
 
   handleMarkAsRead = () => {
-    console.log('handleMarkAsRead', this.state.selected)
+    const { user: { email = '' } } = this.props;
+    const payload = { email, selected: this.state.selected }
+    this.props.onMarkasRead(payload);
+    this.setState({ selected: [] });
   }
 
   handleSelection = (id) => {
@@ -45,10 +51,11 @@ class EmailDashboard extends React.PureComponent {
   }
 
   renderTabsDetails = () => {
-    const { activeKey } = this.state;
+    const { activeKey, selected = [] } = this.state;
     const { userEmail } = this.props;
     const emailPanel = EMAIL_PANELS.find((i) => i.KEY === activeKey);
     return <EmailList
+      selectedEmails={selected}
       onView={this.handleView}
       onSelect={this.handleSelection}
       onDelete={this.handleDelete}

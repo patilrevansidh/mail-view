@@ -20,3 +20,23 @@ export function updateUserMailOnSend(state = {}, payload = {}) {
   })
   return newState
 }
+
+export function deleteEmail(state, payload) {
+  /**
+   * state = { [email]:{sent:[],inbox:[],} }
+   * payload =
+   *  email:'', 
+   *  type:'',
+   *  selected: [ids]
+   */
+  const { email = '', type = '', selected = [] } = payload;
+  if (!state || !state[email]) return state;
+  const userEmails = state[email] || { sent: [], trash: [], inbox: [] }
+  userEmails[type] = userEmails[type].filter(i => !selected.includes(i.id));
+  console.log('*****', userEmails)
+  return {
+    ...state,
+    userEmails
+  }
+
+}

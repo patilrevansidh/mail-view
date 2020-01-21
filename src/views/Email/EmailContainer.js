@@ -1,19 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { onEmailSend } from './action/email-actions';
+import { onEmailSend, onEmailDelete } from './action/email-actions';
 import EmailComponent from './components/email-dashboard';
 class EmailContainer extends Component {
 
-  handleSendEmail = (payload) => {
-    this.props.onSendEmail(payload)
-  }
+  // handleSendEmail = (payload) => {
+  //   this.props.onSendEmail(payload)
+  // }
 
   render() {
-    const { user = {}, userEmail = {} } = this.props;
+    const { user = {}, userEmail = {}, onSendEmail, onEmailDelete, onMarkasRead, } = this.props;
     return (
       <EmailComponent
+        onMarkasRead={onMarkasRead}
+        onDelete={onEmailDelete}
         userEmail={userEmail}
-        onSend={this.handleSendEmail}
+        onSend={onSendEmail}
         user={user} />
     );
   }
@@ -21,7 +23,6 @@ class EmailContainer extends Component {
 
 const mapStateToProps = state => {
   const currentUser = state.user || {};
-  console.log('***',state.email[currentUser.mail])
   return {
     user: currentUser,
     userEmail: (currentUser && state.email) && state.email[currentUser.email] || { sent: [], inbox: [], trash: [] }
@@ -30,7 +31,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatchEvent => {
   return {
-    onSendEmail: payload => dispatchEvent(onEmailSend(payload))
+    onSendEmail: payload => dispatchEvent(onEmailSend(payload)),
+    onEmailDelete: payload => dispatchEvent(onEmailDelete(payload))
   }
 }
 

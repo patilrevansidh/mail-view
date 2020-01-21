@@ -1,6 +1,7 @@
 import shortid from 'shortid';
 export const SEND_EMAIL = 'SEND_EMAIL';
 export const DELETE_EMAIL = 'DELETE_EMAIL';
+export const READ_EMAIL = 'READ_EMAIL';
 
 export function onEmailSend(payload) {
   const id = shortid.generate();
@@ -10,9 +11,25 @@ export function onEmailSend(payload) {
   }
 }
 
-export function onEmailDelete(id) {
+export function onEmailDelete(payload) {
+  /**
+   * email:'', 
+   * type:'',
+   * selected: [ids]
+   */
+
   return {
     type: DELETE_EMAIL,
-    payload: id
+    payload
+  }
+}
+
+export function onMarkasRead(payload) {
+  /**
+   * { email:', selected: [ids] }
+   */
+  return {
+    type: READ_EMAIL,
+    payload
   }
 }

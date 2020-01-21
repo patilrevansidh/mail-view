@@ -15,8 +15,13 @@ class EmailListView extends Component {
     return userEmail[listType] || []
   }
 
+  handleDelete = () => {
+    const { onDelete, type = '' } = this.props;
+    onDelete(type.toLowerCase());
+  }
+
   renderActionButton = () => {
-    const { onDelete, onMarkAsRead } = this.props;
+    const { onMarkAsRead } = this.props;
     return <Row type="flex" justify="space-around" align="middle">
       <Col xs={3}>
         <PrimaryButton> Refresh </PrimaryButton>
@@ -24,7 +29,7 @@ class EmailListView extends Component {
       <Col xs={10}>
         <span >
           <span className='app-border padding-1rem margin-right-05rem'>
-            <AntdIcon onClick={onDelete} type='delete' size={CONSTANTS.DEFAULT} />
+            <AntdIcon onClick={this.handleDelete} type='delete' size={CONSTANTS.DEFAULT} />
           </span>
           <span className='app-border padding-1rem'>
             <AntdIcon onClick={onMarkAsRead} type='eye' size={CONSTANTS.DEFAULT} />
@@ -38,7 +43,7 @@ class EmailListView extends Component {
   }
 
   render() {
-    const { type, onSelect, onView } = this.props;
+    const { type, onSelect, onView, selectedEmails } = this.props;
     const emails = this.getEmailList();
     const title = type + (emails.length > 0 ? ` (${emails.length})` : '');
     return (
@@ -62,6 +67,7 @@ class EmailListView extends Component {
         <div>
           {
             emails.map((mail, index) => <EmailListItem
+              isSelected={selectedEmails.includes(mail.id)}
               onView={onView} onSelect={onSelect}
               first={index === 0} mail={mail} />)
           }
