@@ -2,6 +2,7 @@ import React from 'react';
 import { Modal, Select, Form, Input } from 'antd';
 import { INPUT_PLACEHOLDER } from '../../../common/constants/';
 import '../styles/composeForm.scss';
+import { validateEmail } from '../helper/emailHelper';
 
 const { Option } = Select;
 
@@ -23,13 +24,14 @@ class EmailComposer extends React.PureComponent {
     this.props.onSend(payload)
   }
 
-  handleEmailChange = (email, type) => {
-    this.setState({ [type]: email });
+  handleEmailChange = (email = [], type) => {
+    this.setState({ [type]: email.filter(i => validateEmail(i)) });
   }
 
   renderDropdown = (type = 'to') => {
     const { contacts = [] } = this.props;
-    return <Select mode="multiple"
+    return <Select mode="tags"
+      value={this.state[type]}
       style={{ width: '100%' }}
       placeholder={INPUT_PLACEHOLDER.EMAIL}
       onChange={(selected) => this.handleEmailChange(selected, type)}

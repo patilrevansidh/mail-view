@@ -5,7 +5,17 @@
   font-weight: $default-font-weight;
   font-size: 2rem;
 }
-.primary-button{
+
+.primary-button {
   background-color: $primary-color;
   color: $app-white;
+}
+
+.header-container {
+  background: '#fff';
+  padding-left: 1.5rem
+}
+.logout{
+  padding-left: '1.5rem'; 
+  cursor: 'pointer'
 }

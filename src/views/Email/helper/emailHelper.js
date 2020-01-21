@@ -14,7 +14,7 @@ export function updateUserMailOnSend(state = {}, payload = {}) {
     const recipient = (state[mail] || newState[mail]) || { sent: [], trash: [], inbox: [] }; // if user sends to himself first email
     newState[mail] = {
       sent: [...recipient.sent] || [],
-      inbox: [...recipient.inbox, { ...payload, read: false }],
+      inbox: [{ ...payload, read: false }, ...recipient.inbox],
       trash: recipient.trash || [],
     }
   })
@@ -53,4 +53,9 @@ export function onReadMark(state, payload) {
     [email]: { ...userEmails, inbox }
   }
 
+}
+
+export function validateEmail(emailField) {
+  const reg = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+  return reg.test(emailField)
 }

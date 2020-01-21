@@ -60,17 +60,21 @@ export class PrivateRoute extends React.PureComponent {
     </Menu>
   </Sider>;
 
-  renderHeader = () => <Header style={{ background: '#fff', paddingLeft: 24 }}>
-    <AntdIcon size={CONSTANTS.LARGE} type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.toggle} />
-    <span style={{ float: 'right' }}>
-      <Badge count={5}>
-        <AntdIcon size={CONSTANTS.DEFAULT} type='mail' />
-      </Badge>
-      <span style={{ paddingLeft: '1.5rem', cursor: 'pointer' }} onClick={this.handleLogout} >
-        <AntdIcon type="logout" size={CONSTANTS.DEFAULT} /> Log out
+  renderHeader = () => {
+    const { userEmail } = this.props;
+    const unreadMails = userEmail.inbox.filter(i => !i.read).length;
+    return <Header style={{ background: '#fff', paddingLeft: 24 }}>
+      <AntdIcon size={CONSTANTS.LARGE} type={this.state.collapsed ? 'menu-unfold' : 'menu-fold'} onClick={this.toggle} />
+      <span style={{ float: 'right' }}>
+        <Badge count={unreadMails}>
+          <AntdIcon size={CONSTANTS.DEFAULT} type='mail' />
+        </Badge>
+        <span style={{ paddingLeft: '1.5rem', cursor: 'pointer' }} onClick={this.handleLogout} >
+          <AntdIcon type="logout" size={CONSTANTS.DEFAULT} /> Log out
       </span>
-    </span>
-  </Header>;
+      </span>
+    </Header>;
+  }
 
   render() {
     const { user: { isLoggedIn = false }, path, component } = this.props
@@ -85,9 +89,9 @@ export class PrivateRoute extends React.PureComponent {
         component={() => {
           return <Layout>
             {this.renderSidebar()}
-            <div style={{ width: '100%' }}>
+            <div className='full-width'>
               {this.renderHeader()}
-              <Content style={{ height: '90%' }}>
+              <Content className='content-view'>
                 <ComponentView {...this.props} />
               </Content>
             </div>
@@ -101,7 +105,7 @@ export class PrivateRoute extends React.PureComponent {
 export class App extends React.PureComponent {
   render() {
     return (
-      <Layout style={{ height: '100%' }}>
+      <Layout className='full-height'>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <Router basename={ROUTE_PATH.BASE}>
@@ -118,8 +122,10 @@ export class App extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
+  const currentUser = state.user || {};
   return {
-    user: state.user
+    user: currentUser,
+    userEmail: (currentUser && state.email) && state.email[currentUser.email] || { sent: [], inbox: [], trash: [] }
   }
 }
 const mapDispatchToProps = dispatchEvent => {
