@@ -34,7 +34,7 @@ export class PrivateRoute extends React.PureComponent {
             return <Menu.SubMenu
               title={
                 <div>
-                  <Icon type={icon} />
+                  <AntdIcon type={icon} />
                   <span className="submenu-title-wrapper">
                     {label}
                   </span>
@@ -43,7 +43,7 @@ export class PrivateRoute extends React.PureComponent {
               {
                 children.map(i => {
                   return <Menu.Item key={i.keyValue}>
-                    {icon && <Icon type={i.icon} />}
+                    {icon && <AntdIcon type={i.icon} />}
                     <span>{i.label}</span>
                   </Menu.Item>
                 })
@@ -52,7 +52,7 @@ export class PrivateRoute extends React.PureComponent {
             </Menu.SubMenu>
           }
           return <Menu.Item key={keyValue}>
-            {icon && <Icon type={icon} />}
+            {icon && <AntdIcon type={icon} />}
             <span>{label}</span>
           </Menu.Item>
         })

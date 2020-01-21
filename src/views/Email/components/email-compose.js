@@ -19,8 +19,8 @@ class EmailComposer extends React.PureComponent {
 
   handleOk = () => {
     const { from = '' } = this.props;
-    const payload = { ...this.state, from }    
-    this.props.onSend(payload)    
+    const payload = { ...this.state, from, read: false }
+    this.props.onSend(payload)
   }
 
   handleEmailChange = (email, type) => {
@@ -44,12 +44,11 @@ class EmailComposer extends React.PureComponent {
   }
 
   isEmailFormValid = () => {
-    const { to, cc, subject, body } = this.state;
-    return (!to.length  || !subject || !body)
+    const { to, subject, body } = this.state;
+    return (!to.length || !subject || !body)
   }
 
   render() {
-    const { contacts = [] } = this.props;
     return (
       <Modal
         title="New Message"

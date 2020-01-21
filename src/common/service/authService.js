@@ -16,16 +16,4 @@ export class AuthService {
     })
   }
 
-  // async getContacts(email) {
-  //   const user = users.find((user) => (user.email === email))
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       if (!user) {
-  //         reject()
-  //       }
-  //       resolve(user.contacts)
-  //     }, 500);
-  //   })
-  // }
-
 }

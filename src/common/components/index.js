@@ -1,4 +1,4 @@
-import { AntdIcon } from './icon';
+import { AntdIcon } from './Icon';
 import { AppTitle } from './header';
 import { PrimaryButton } from './button';
 
