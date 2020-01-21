@@ -16,7 +16,7 @@
   }
 
   .menu-item-container {
-    border-bottom: 1px solid $app-border-gray;
+    border-bottom: 1px dotted $app-border-gray;
     .email-menu-item {
       width: 100%;
       padding-left: 1.5rem;
@@ -35,13 +35,15 @@
   .email-list-container {
     background-color: $app-white;
     height: 100%;
-
+    .email-item-preview{
+      cursor: pointer;
+    }
     .action-button-container {
       margin-top: 0.5rem;
       margin-bottom: 0.5rem;
     }
-    .email-list-header {
-      padding: 1rem 0 0 1rem;
+    .email-list-header {      
+      margin: 0.5rem;
       .search-container {
         float: right;
         padding-top: 1rem;

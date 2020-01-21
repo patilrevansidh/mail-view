@@ -1,5 +1,5 @@
-import { AntdIcon } from './Icon';
+import { AntdIcon } from './icon';
 import { AppTitle } from './header';
-import { PrimaryButton } from './button';
+import { PrimaryButton, DefaultButton } from './button';
 
-export { AntdIcon, AppTitle, PrimaryButton }
+export { AntdIcon, AppTitle, PrimaryButton, DefaultButton }

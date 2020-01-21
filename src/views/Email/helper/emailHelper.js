@@ -28,7 +28,7 @@ export function deleteEmail(state, payload) {
   userEmails[type] = userEmails[type].filter(i => !selected.includes(i.id));
   return {
     ...state,
-    userEmails
+    [email]: userEmails
   }
 }
 
@@ -37,7 +37,7 @@ export function onReadMark(state, payload) {
   const { email = '', selected = [] } = payload;
   if (!state || !state[email]) return state;
   const userEmails = state[email] || { sent: [], trash: [], inbox: [] }
-  userEmails.inbox = userEmails.inbox.map(i => {
+  const inbox = userEmails.inbox.map(i => {
     if (selected.includes(i.id)) {
       return { ...i, read: true }
     }
@@ -45,7 +45,7 @@ export function onReadMark(state, payload) {
   })
   return {
     ...state,
-    userEmails
+    [email]: { ...userEmails, inbox }
   }
 
 }

@@ -24,18 +24,18 @@ export class EmailListItem extends React.PureComponent {
     }
 
     render() {
-        const { mail, first } = this.props;
+        const { mail, first, isSelected } = this.props;
         let className = first ? 'email-first-list-item' : 'email-list-item';
         className = !mail.read ? className + ' unread-email' : className;
         return (
             <Row className={className} >
                 <Col xs={4}>
                     <span>
-                        <Checkbox onClick={this.handleSelect} />
+                        <Checkbox checked={isSelected} onClick={this.handleSelect} />
                         <span>{mail.name}</span>
                     </span>
                 </Col>
-                <Col xs={16} onClick={this.handleDetailView}>
+                <Col className='email-item-preview' xs={16} onClick={this.handleDetailView}>
                     <span>{mail.subject}</span>
                 </Col>
             </Row >

@@ -1,8 +1,8 @@
+import { Col, Input, Row } from 'antd';
 import React, { Component } from 'react';
-import { AppTitle, AntdIcon, PrimaryButton } from '../../../common/components';
+import { AntdIcon, AppTitle, DefaultButton } from '../../../common/components';
 import { CONSTANTS } from '../../../common/constants/index';
 import { EmailListItem } from './email-view';
-import { Input, Row, Col, Checkbox } from 'antd';
 const { Search } = Input;
 
 class EmailListView extends Component {
@@ -24,7 +24,7 @@ class EmailListView extends Component {
     const { onMarkAsRead } = this.props;
     return <Row type="flex" justify="space-around" align="middle">
       <Col xs={3}>
-        <PrimaryButton> Refresh </PrimaryButton>
+        <DefaultButton> Refresh </DefaultButton>
       </Col>
       <Col xs={10}>
         <span >
@@ -48,8 +48,8 @@ class EmailListView extends Component {
     const title = type + (emails.length > 0 ? ` (${emails.length})` : '');
     return (
       <div>
-        <div>
-          <span className='email-list-header'>
+        <div className='email-list-header'>
+          <span >
             <AppTitle title={title} />
             <span className='search-container'>
               <Search
