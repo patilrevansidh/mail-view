@@ -14,7 +14,7 @@ export function updateUserMailOnSend(state = {}, payload = {}) {
     const recipient = (state[mail] || newState[mail]) || { sent: [], trash: [], inbox: [] }; // if user sends to himself first email
     newState[mail] = {
       sent: [...recipient.sent] || [],
-      inbox: [...recipient.inbox, payload],
+      inbox: [...recipient.inbox, { ...payload, read: false }],
       trash: recipient.trash || [],
     }
   })
@@ -22,18 +22,27 @@ export function updateUserMailOnSend(state = {}, payload = {}) {
 }
 
 export function deleteEmail(state, payload) {
-  /**
-   * state = { [email]:{sent:[],inbox:[],} }
-   * payload =
-   *  email:'', 
-   *  type:'',
-   *  selected: [ids]
-   */
   const { email = '', type = '', selected = [] } = payload;
   if (!state || !state[email]) return state;
   const userEmails = state[email] || { sent: [], trash: [], inbox: [] }
   userEmails[type] = userEmails[type].filter(i => !selected.includes(i.id));
-  console.log('*****', userEmails)
+  return {
+    ...state,
+    userEmails
+  }
+}
+
+export function onReadMark(state, payload) {
+  // { email, selected: this.state.selected }
+  const { email = '', selected = [] } = payload;
+  if (!state || !state[email]) return state;
+  const userEmails = state[email] || { sent: [], trash: [], inbox: [] }
+  userEmails.inbox = userEmails.inbox.map(i => {
+    if (selected.includes(i.id)) {
+      return { ...i, read: true }
+    }
+    return i
+  })
   return {
     ...state,
     userEmails

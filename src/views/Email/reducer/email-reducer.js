@@ -1,5 +1,5 @@
 import { DELETE_EMAIL, SEND_EMAIL, READ_EMAIL } from '../action/email-actions';
-import { updateUserMailOnSend, deleteEmail } from '../helper/emailHelper';
+import { updateUserMailOnSend, deleteEmail, onReadMark } from '../helper/emailHelper';
 import { REHYDRATE } from 'redux-persist';
 
 export const emailReducers = (state = {}, action) => {
@@ -10,9 +10,14 @@ export const emailReducers = (state = {}, action) => {
         ...state,
         ...payload.email,
       };
+
+    case READ_EMAIL:
+      const readMails = onReadMark(state, action.payload)
+      return readMails;
+
     case DELETE_EMAIL:
-      const updatedMails = deleteEmail(state, action.payload)
-      return updatedMails;
+      const deletedMails = deleteEmail(state, action.payload)
+      return deletedMails;
 
     case SEND_EMAIL:
       const updatesMailServer = updateUserMailOnSend(state, action.payload)

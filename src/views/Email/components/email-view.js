@@ -26,7 +26,7 @@ export class EmailListItem extends React.PureComponent {
     render() {
         const { mail, first } = this.props;
         let className = first ? 'email-first-list-item' : 'email-list-item';
-        className = mail.read ? className + 'unread-email' : className;
+        className = !mail.read ? className + ' unread-email' : className;
         return (
             <Row className={className} >
                 <Col xs={4}>

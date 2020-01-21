@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { onEmailSend, onEmailDelete } from './action/email-actions';
+import { onEmailSend, onEmailDelete, onMarkasRead } from './action/email-actions';
 import EmailComponent from './components/email-dashboard';
 class EmailContainer extends Component {
 
@@ -32,7 +32,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatchEvent => {
   return {
     onSendEmail: payload => dispatchEvent(onEmailSend(payload)),
-    onEmailDelete: payload => dispatchEvent(onEmailDelete(payload))
+    onEmailDelete: payload => dispatchEvent(onEmailDelete(payload)),
+    onMarkasRead: payload => dispatchEvent(onMarkasRead(payload))
   }
 }
 

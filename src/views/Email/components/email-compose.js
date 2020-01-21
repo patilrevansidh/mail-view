@@ -19,7 +19,7 @@ class EmailComposer extends React.PureComponent {
 
   handleOk = () => {
     const { from = '' } = this.props;
-    const payload = { ...this.state, from, read: false }
+    const payload = { ...this.state, from }
     this.props.onSend(payload)
   }
 
