@@ -13,12 +13,12 @@ class EmailContainer extends Component {
     }
   }
 
-  handleEmailDetails = (id, type) => {
+  handleEmailDetails = (id, type, activeKey) => {
     const { onRead, user: { email = '' } } = this.props;
     onRead(email, id)
     this.props.history.push({
       pathname: `/email/${id}`,
-      state: type
+      state: { type, activeKey }
     })
   }
 
@@ -29,11 +29,15 @@ class EmailContainer extends Component {
   }
 
   render() {
-    const { user = {}, userEmail = {}, onSendEmail, onEmailDelete, onMarkasRead, computedMatch: { params = {} } } = this.props;
+    const {
+      user = {}, userEmail = {}, onSendEmail, onEmailDelete, onMarkasRead,
+      computedMatch: { params = {} }, location = { state: null }
+    } = this.props;
     const { isDetail } = this.state;
     return (
       <EmailComponent id={params.id}
         isDetail={isDetail}
+        locationState={location.state}
         onBackRefresh={this.handleGoBack}
         onView={this.handleEmailDetails}
         onMarkasRead={onMarkasRead}

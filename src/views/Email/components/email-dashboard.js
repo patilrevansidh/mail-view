@@ -58,8 +58,10 @@ class EmailDashboard extends React.PureComponent {
   }
 
   renderTabsDetails = () => {
-    const { activeKey, selected = [] } = this.state;
-    const { userEmail, onView, isDetail, id, onBackRefresh, user = {} } = this.props;
+    const { selected = [] } = this.state;
+    const { userEmail, onView, isDetail, id, onBackRefresh, user = {}, locationState = {} } = this.props;
+    let activeKey = locationState.activeKey || this.state.activeKey
+
     const emailPanel = EMAIL_PANELS.find((i) => i.KEY === activeKey);
     return <EmailList isDetail={isDetail} id={id}
       onDelete={this.handleDelete}
@@ -69,6 +71,7 @@ class EmailDashboard extends React.PureComponent {
       selectedEmails={selected}
       onRead={this.onRead}
       user={user}
+      activeKey={activeKey}
       onView={onView} userEmail={userEmail}
       type={emailPanel.NAME} />;
   }
