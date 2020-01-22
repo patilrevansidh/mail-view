@@ -33,3 +33,11 @@ export function onMarkasRead(payload) {
     payload
   }
 }
+
+export function onRead(email, id) {
+  const payload = { email: email, selected: [id] }
+  return {
+    type: READ_EMAIL,
+    payload
+  }
+}

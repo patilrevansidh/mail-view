@@ -2,8 +2,14 @@ import React from 'react';
 import { Row, Col, Checkbox, Avatar } from 'antd';
 
 export class EmailDetailView extends React.PureComponent {
+
     render() {
         const { emailDetail = {} } = this.props
+        if (!emailDetail || !emailDetail.subject) {
+            return <div className='email-not-found'>
+                No Such Email
+            </div>
+        }
         return (
             <div className='email-detail-view '>
                 <span className='email-subject'>{emailDetail.subject}</span>
@@ -56,7 +62,7 @@ export class EmailListItem extends React.PureComponent {
                 <Col className='email-item-preview' xs={16} onClick={this.handleDetailView}>
                     <span>{mail.subject}</span>
                 </Col>
-            </Row >
+            </Row>
         )
     }
 }

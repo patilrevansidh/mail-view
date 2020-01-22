@@ -42,7 +42,7 @@ class EmailListView extends Component {
   }
 
   render() {
-    const { type, onSelect, onView, selectedEmails, isDetail, id } = this.props;
+    const { type, onSelect, onView, selectedEmails, isDetail, id, user, onRead } = this.props;
     const emails = this.getEmailList();
     const title = type + (emails.length > 0 ? ` (${emails.length})` : '');
     const emailDetail = emails.find(i => i.id === id);
@@ -70,6 +70,7 @@ class EmailListView extends Component {
               isSelected={selectedEmails.includes(mail.id)}
               onView={onView} onSelect={onSelect}
               first={index === 0} mail={mail} />)
+
             || <EmailDetailView emailDetail={emailDetail} />
           }
         </div>
