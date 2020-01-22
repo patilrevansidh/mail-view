@@ -1,0 +1,13 @@
+@import "./variable.scss";
+
+.name {
+  color: $app-white;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem;
+}
+.user-profile {
+  margin: 0.5rem 0rem;
+  // margin-bottom: 0.5rem;
+  text-align: center;
+}

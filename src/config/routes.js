@@ -1,5 +1,5 @@
 import React from 'react';
-import { Layout, Menu, Icon, Badge, } from 'antd';
+import { Layout, Menu, Icon, Badge, Avatar, } from 'antd';
 import { HashRouter as Router, Route, Switch, Redirect, Link } from 'react-router-dom';
 import LoginContainer from '../views/Auth/LoginContainer';
 import EmailContainer from '../views/Email/EmailContainer';
@@ -9,6 +9,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from './store';
 import { connect } from 'react-redux';
 import { AntdIcon } from '../common/components'
+import '../common/styles/layout.scss'
 import { onLogOut } from '../views/Auth/action/auth-action';
 
 const { Header, Sider, Content } = Layout;
@@ -24,8 +25,12 @@ export class PrivateRoute extends React.PureComponent {
     this.props.onLogOut()
   }
 
-  renderSidebar = () => <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
+  renderSidebar = (name) => <Sider trigger={null} collapsible collapsed={this.state.collapsed}>
     <div className="logo" />
+    <div className='user-profile'>
+      <Avatar size='large' icon='user' />
+      <div className='name'>{name}</div>
+    </div>
     <Menu theme="dark" mode="inline" defaultSelectedKeys={['1']}>
       {
         SIDE_BAR.map((item) => {
@@ -77,7 +82,7 @@ export class PrivateRoute extends React.PureComponent {
   }
 
   render() {
-    const { user: { isLoggedIn = false }, path, component } = this.props
+    const { user: { isLoggedIn = false, name = '' }, path, component } = this.props
     if (!isLoggedIn) {
       return <Redirect to='/login' />
     }
@@ -88,7 +93,7 @@ export class PrivateRoute extends React.PureComponent {
         path={path}
         component={() => {
           return <Layout>
-            {this.renderSidebar()}
+            {this.renderSidebar(name)}
             <div className='full-width'>
               {this.renderHeader()}
               <Content className='content-view'>
