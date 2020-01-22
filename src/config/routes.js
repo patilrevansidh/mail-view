@@ -110,6 +110,7 @@ export class App extends React.PureComponent {
           <PersistGate loading={null} persistor={persistor}>
             <Router basename={ROUTE_PATH.BASE}>
               <Switch>
+                <PrivateRoutes exact path={ROUTE_PATH.EMAIL_DETAIL} component={EmailContainer} />
                 <PrivateRoutes exact path={ROUTE_PATH.BASE} component={EmailContainer} />
                 <Route exact path={ROUTE_PATH.AUTH} component={LoginContainer} />
               </Switch>

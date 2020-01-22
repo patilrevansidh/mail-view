@@ -1,11 +1,29 @@
 import React from 'react';
-import { Row, Col, Checkbox } from 'antd';
+import { Row, Col, Checkbox, Avatar } from 'antd';
 
 export class EmailDetailView extends React.PureComponent {
     render() {
+        const { emailDetail = {} } = this.props
         return (
-            <div>
-                EmailDetailView
+            <div className='email-detail-view '>
+                <span className='email-subject'>{emailDetail.subject}</span>
+                <div className='sender-recipient-container'>
+                    <span className='sender-container'>
+                        <Avatar size="small" icon="user" />
+                        <span className='from'>{emailDetail.from}</span>
+                    </span>
+                    <div className='recipient-container'>
+                        <div className='recipient-list'>
+                            To {emailDetail.to.toString()}
+                        </div>
+                        <div className='recipient-list'>
+                            CC {emailDetail.cc.toString()}
+                        </div>
+                    </div>
+                </div>
+                <div className='email-body'>
+                    {emailDetail.body}
+                </div>
             </div>
         );
     }

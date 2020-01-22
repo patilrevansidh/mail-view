@@ -1,4 +1,4 @@
-@import '../styles/variable.scss';
+@import "../styles/variable.scss";
 
 .header-title {
   color: $app-font-color;
@@ -12,10 +12,10 @@
 }
 
 .header-container {
-  background: '#fff';
-  padding-left: 1.5rem
+  background: $app-white;
+  padding-left: 1.5rem;
 }
-.logout{
-  padding-left: '1.5rem'; 
-  cursor: 'pointer'
+.logout {
+  padding-left: 1.5rem;
+  cursor: pointer;
 }

@@ -1,0 +1,26 @@
+.email-detail-view {
+  margin: 1rem;
+  padding: 0.5rem;
+  .email-subject {
+    line-height: 2.5;
+    font-size: 1.5rem;
+    font-weight: 400;
+  }
+  .sender-recipient-container {
+    .sender-container {
+      line-height: 3;
+      .from {
+        padding-left: 0.25rem;
+      }
+    }
+  }
+  .recipient-container {
+    .recipient-list {
+      line-height: 3;
+      font-weight: 600;
+    }
+  }
+  .email-body {
+    padding: 1rem;
+  }
+}

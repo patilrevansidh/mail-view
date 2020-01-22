@@ -2,16 +2,35 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { onEmailSend, onEmailDelete, onMarkasRead } from './action/email-actions';
 import EmailComponent from './components/email-dashboard';
+import { withRouter } from 'react-router-dom';
+import './styles/emai-view.scss';
 class EmailContainer extends Component {
+  state = { isDetail: false }
+  componentDidMount() {
+    const { computedMatch: { params = {} } } = this.props;
+    if (params.id) {
+      this.setState({ isDetail: true });
+    }
+  }
 
-  // handleSendEmail = (payload) => {
-  //   this.props.onSendEmail(payload)
-  // }
+  handleEmailDetails = (id) => {
+    this.props.history.push('/email/' + id)
+  }
+
+  handleGoBack = () => {
+    if (this.state.isDetail) {
+      this.props.history.goBack();
+    }
+  }
 
   render() {
-    const { user = {}, userEmail = {}, onSendEmail, onEmailDelete, onMarkasRead, } = this.props;
+    const { user = {}, userEmail = {}, onSendEmail, onEmailDelete, onMarkasRead, computedMatch: { params = {} } } = this.props;
+    const { isDetail } = this.state;
     return (
-      <EmailComponent
+      <EmailComponent id={params.id}
+        isDetail={isDetail}
+        onBackRefresh={this.handleGoBack}
+        onView={this.handleEmailDetails}
         onMarkasRead={onMarkasRead}
         onDelete={onEmailDelete}
         userEmail={userEmail}
@@ -25,7 +44,8 @@ const mapStateToProps = state => {
   const currentUser = state.user || {};
   return {
     user: currentUser,
-    userEmail: (currentUser && state.email) && state.email[currentUser.email] || { sent: [], inbox: [], trash: [] }
+    userEmail: (currentUser && state.email) && state.email[currentUser.email]
+      || { sent: [], inbox: [], trash: [] }
   }
 }
 
@@ -37,4 +57,4 @@ const mapDispatchToProps = dispatchEvent => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(EmailContainer);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(EmailContainer));
