@@ -61,7 +61,7 @@ class EmailDashboard extends React.PureComponent {
     const { activeKey, selected = [] } = this.state;
     const { userEmail, onView, isDetail, id, onBackRefresh, user = {} } = this.props;
     const emailPanel = EMAIL_PANELS.find((i) => i.KEY === activeKey);
-    return <EmailList isDetail={isDetail}
+    return <EmailList isDetail={isDetail} id={id}
       onDelete={this.handleDelete}
       onBackRefresh={onBackRefresh}
       onSelect={this.handleSelection}
