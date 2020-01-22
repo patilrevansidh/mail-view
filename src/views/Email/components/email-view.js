@@ -43,8 +43,8 @@ export class EmailListItem extends React.PureComponent {
     }
 
     handleDetailView = () => {
-        const { mail } = this.props;
-        this.props.onView(mail.id);
+        const { mail, type } = this.props;
+        this.props.onView(mail.id, type);
     }
 
     render() {

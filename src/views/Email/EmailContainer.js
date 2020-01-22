@@ -13,10 +13,13 @@ class EmailContainer extends Component {
     }
   }
 
-  handleEmailDetails = (id) => {
+  handleEmailDetails = (id, type) => {
     const { onRead, user: { email = '' } } = this.props;
     onRead(email, id)
-    this.props.history.push('/email/' + id)
+    this.props.history.push({
+      pathname: `/email/${id}`,
+      state: type
+    })
   }
 
   handleGoBack = () => {
