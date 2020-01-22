@@ -35,10 +35,11 @@ class RegistrationForm extends React.PureComponent {
 
 
   render() {
-    const { getFieldDecorator } = this.props.form;
-
+    const { getFieldDecorator, } = this.props.form;
+    const { loader, serverError } = this.props;
     return (
       <Form style={formStyle} {...FORM_LAYOUTS.FORM_ITEM_} onSubmit={this.handleSubmit}>
+
         <Form.Item label="E-mail">
           {getFieldDecorator('email', {
             rules: [
@@ -67,9 +68,10 @@ class RegistrationForm extends React.PureComponent {
           })(<Input.Password />)}
         </Form.Item>
         <Form.Item {...FORM_LAYOUTS.TAIL_FORM_ITEM}>
-          <Button type="primary" htmlType="submit">
+          <Button loading={loader} type="primary" htmlType="submit">
             Login
           </Button>
+          {serverError && <span className='has-error'>{serverError}</span>}
         </Form.Item>
       </Form>
     );

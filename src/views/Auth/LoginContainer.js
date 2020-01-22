@@ -8,31 +8,35 @@ import { withRouter, Redirect } from 'react-router-dom';
 import { IMP_KEYS } from '../../common/constants';
 
 class LoginContainer extends Component {
-  
+
   authService = new AuthService()
   state = { loader: false, serverError: null }
 
   onLogin = async (payload) => {
     try {
+      this.setState({ serverError: null, loader: true });
       const userInfo = await this.authService.login(payload);
       const { login, history } = this.props;
       localStorage.setItem(IMP_KEYS.AUTH_STORAGE_KEYS, true)
       login(userInfo);
       history.push('/');
     } catch (error) {
-      this.setState({ serverError: error });
+      console.log('** Error **', error)
+      this.setState({ serverError: error, loader: false });
     }
   }
 
   render() {
     const { user: { isLoggedIn = false } } = this.props;
+    const { loader, serverError } = this.state;
     if (isLoggedIn) {
       return <Redirect to='/' />
     }
     return (
-      <Layout style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <Layout style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>        
         <LoginForm
-          serverError={this.state.serverError}
+          loader={loader}
+          serverError={serverError}
           onLogin={this.onLogin} />
       </Layout>
     );
