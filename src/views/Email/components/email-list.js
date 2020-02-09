@@ -25,17 +25,11 @@ class EmailListView extends Component {
   renderActionButton = () => {
     const { onMarkAsRead, isDetail, onBackRefresh } = this.props;
     return <Row className='margin-left-1rem' type="flex" justify="start" align="middle">
-      <Col xs={3}>
-        <DefaultButton onClick={onBackRefresh}> {isDetail ? "Back" : "Refresh"} </DefaultButton>
-      </Col>
-      <Col xs={10}>
-        <span >
-          <span className='app-border padding-1rem margin-right-05rem'>
-            <AntdIcon onClick={this.handleDelete} type='delete' size={CONSTANTS.DEFAULT} />
-          </span>
-          <span className='app-border padding-1rem'>
-            <AntdIcon onClick={onMarkAsRead} type='eye' size={CONSTANTS.DEFAULT} />
-          </span>
+      <Col xs={6}>
+        <span style={{ display: 'flex' }}>
+          <DefaultButton className='margin-right-05rem' onClick={onBackRefresh}> {isDetail ? "Back" : "Refresh"} </DefaultButton>
+          <DefaultButton className='margin-right-05rem' onClick={this.handleDelete} icon='delete' size={CONSTANTS.DEFAULT} />
+          <DefaultButton className='margin-right-05rem' onClick={onMarkAsRead} icon='eye' size={CONSTANTS.DEFAULT} />
         </span>
       </Col>
     </Row>
