@@ -4,6 +4,12 @@
   height: 100%;
   padding: 1rem;
 
+  .list-header-container {
+    padding: 8px 4px;
+    padding-left: 1.5rem;
+    font-weight: 700;
+  }
+
   .compose-button-container {
     text-align: center;
     width: 80%;
@@ -14,11 +20,6 @@
       margin: 0.5rem 1rem;
     }
 
-    .list-header-container {
-      padding: 8px 4px;
-      padding-left: 1.5rem;
-      font-weight: 700;
-    }
   }
 
   .menu-item-container {

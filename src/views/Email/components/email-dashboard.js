@@ -7,8 +7,10 @@ import EmailList from './email-list';
 
 // const { TabPane } = Tabs;
 const EMAIL_PANELS = [
-  { NAME: 'Inbox', KEY: '1', ICON: 'inbox' },
-  { NAME: 'Sent', KEY: '2', ICON: 'mail' },
+  { NAME: 'Inbox', KEY: '1', ICON: 'inbox', type:'warning' },
+  { NAME: 'Send Mail', KEY: '2', ICON: 'mail' },
+  { NAME: 'Important', KEY: '2', ICON: 'star', theme:'filled' },
+  { NAME: 'Drafts', KEY: '2', ICON: 'file-text' },
   { NAME: 'Trash', KEY: '3', ICON: 'delete' },
 ];
 
@@ -93,7 +95,7 @@ class EmailDashboard extends React.PureComponent {
               {
                 EMAIL_PANELS.map(item => <Col xs={24} md={24} className='menu-item-container'>
                   <span onClick={() => this.handleClick(item.KEY)} className='email-menu-item'>
-                    {item.ICON && <AntdIcon className='menu-icon' size='large' type={item.ICON} />}
+                    {item.ICON && <AntdIcon className='menu-icon' size='large' type={item.ICON} theme={item.theme} />}
                     <span className='menu-item-label'>{item.NAME}</span>
                   </span>
                 </Col>)
