@@ -7,12 +7,21 @@ import EmailList from './email-list';
 
 // const { TabPane } = Tabs;
 const EMAIL_PANELS = [
-  { NAME: 'Inbox', KEY: '1', ICON: 'inbox', type:'warning' },
+  { NAME: 'Inbox', KEY: '1', ICON: 'inbox', type: 'warning' },
   { NAME: 'Send Mail', KEY: '2', ICON: 'mail' },
-  { NAME: 'Important', KEY: '2', ICON: 'star', theme:'filled' },
+  { NAME: 'Important', KEY: '2', ICON: 'star', theme: 'filled' },
   { NAME: 'Drafts', KEY: '2', ICON: 'file-text' },
   { NAME: 'Trash', KEY: '3', ICON: 'delete' },
 ];
+
+const CATEGORIES_LIST = [
+  { NAME: 'Work', KEY: '1', color: 'work_color_tag' },
+  { NAME: 'Documents', KEY: '1', color: 'documents_color_tag' },
+  { NAME: 'Social', KEY: '1', color: 'social_color_tag' },
+  { NAME: 'Advertising', KEY: '1', color: 'advertising_color_tag' },
+  { NAME: 'cliets', KEY: '1', color: 'clients_color_tag' },
+
+]
 
 class EmailDashboard extends React.PureComponent {
 
@@ -84,7 +93,7 @@ class EmailDashboard extends React.PureComponent {
     return (
       <Layout style={{ height: '100%' }}>
         <Row className='email-container'>
-          <Col xs={4}>
+          <Col xs={6}>
             <Row gutter={[8, 16]}>
               <Col xs={24} md={24} className='compose-button-container'>
                 <PrimaryButton onClick={this.handleCompose} className='compose-button' block='large'>Compose Mail</PrimaryButton>
@@ -100,9 +109,20 @@ class EmailDashboard extends React.PureComponent {
                   </span>
                 </Col>)
               }
+              <Col xs={24} md={24} className='list-header-container'>
+                CATEGORIES
+              </Col>
+              {
+                CATEGORIES_LIST.map(item => <Col xs={24} md={24} className=''>
+                  <span className='category-item-container'>
+                    <div className={`tag_circle ${item.color}`} />
+                    <div>{item.NAME}</div>
+                  </span>
+                </Col>)
+              }
             </Row>
           </Col>
-          <Col xs={20} className='email-list-container'>
+          <Col xs={18} className='email-list-container'>
             {this.renderTabsDetails()}
             {
               showCompose && <EmailCompose
