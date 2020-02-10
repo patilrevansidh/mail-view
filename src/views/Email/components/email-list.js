@@ -65,7 +65,6 @@ class EmailListView extends Component {
               isSelected={selectedEmails.includes(mail.id)}
               onView={onView} onSelect={onSelect}
               first={index === 0} mail={mail} />)
-
             || <EmailDetailView emailDetail={emailDetail} />
           }
         </div>

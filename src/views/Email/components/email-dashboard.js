@@ -87,6 +87,9 @@ class EmailDashboard extends React.PureComponent {
               <Col xs={24} md={24} className='compose-button-container'>
                 <PrimaryButton onClick={this.handleCompose} className='compose-button' block='large'>Compose Mail</PrimaryButton>
               </Col>
+              <Col xs={24} md={24} className='list-header-container'>
+                FOLDERS
+              </Col>
               {
                 EMAIL_PANELS.map(item => <Col xs={24} md={24} className='menu-item-container'>
                   <span onClick={() => this.handleClick(item.KEY)} className='email-menu-item'>
