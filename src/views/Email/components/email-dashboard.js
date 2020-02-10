@@ -16,12 +16,13 @@ const EMAIL_PANELS = [
 
 const CATEGORIES_LIST = [
   { NAME: 'Work', KEY: '1', color: 'work_color_tag' },
-  { NAME: 'Documents', KEY: '1', color: 'documents_color_tag' },
-  { NAME: 'Social', KEY: '1', color: 'social_color_tag' },
-  { NAME: 'Advertising', KEY: '1', color: 'advertising_color_tag' },
-  { NAME: 'cliets', KEY: '1', color: 'clients_color_tag' },
-
+  { NAME: 'Documents', KEY: '2', color: 'documents_color_tag' },
+  { NAME: 'Social', KEY: '3', color: 'social_color_tag' },
+  { NAME: 'Advertising', KEY: '4', color: 'advertising_color_tag' },
+  { NAME: 'cliets', KEY: '5', color: 'clients_color_tag' },
 ]
+
+const LABELS_LIST = ['Family', 'Work', 'Home', 'Children', 'Holidays', 'Music', 'Flim']
 
 class EmailDashboard extends React.PureComponent {
 
@@ -113,13 +114,29 @@ class EmailDashboard extends React.PureComponent {
                 CATEGORIES
               </Col>
               {
-                CATEGORIES_LIST.map(item => <Col xs={24} md={24} className=''>
+                CATEGORIES_LIST.map(item => <Col key={item.KEY} xs={24} md={24} className=''>
                   <span className='category-item-container'>
                     <div className={`tag_circle ${item.color}`} />
                     <div>{item.NAME}</div>
                   </span>
                 </Col>)
               }
+              <Col xs={24} md={24} className='list-header-container'>
+                LABELS
+              </Col>
+              <Col xs={24} md={22} >
+                <Row type='flex' gutter={[8, 8]}>
+                  {
+                    LABELS_LIST.map((item, index) => <Col span={8} order={index}>
+                      <div className='label-item'>
+                        <AntdIcon type="tag" />
+                        {item}
+                      </div>
+                    </Col>
+                    )
+                  }
+                </Row>
+              </Col>
             </Row>
           </Col>
           <Col xs={18} className='email-list-container'>
@@ -134,7 +151,7 @@ class EmailDashboard extends React.PureComponent {
             }
           </Col>
         </Row>
-      </Layout>
+      </Layout >
     );
   }
 }

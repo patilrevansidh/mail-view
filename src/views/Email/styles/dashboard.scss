@@ -81,7 +81,7 @@
 }
 
 .category-item-container {
-  display: flex;  
+  display: flex;
   padding-left: 2rem;
   align-items: center;
 
@@ -113,3 +113,15 @@
     background-color: $app-secondary;
   }
 }
+
+// .label-container {
+//   display: flex;
+//   flex-wrap: wrap;
+
+  .label-item {
+    background-color: $app-white;
+    padding-left: 0.25rem;
+    border: solid 1px $app-border-gray;    
+    // width: 100px;    
+  }
+// }
