@@ -8,7 +8,7 @@ import EmailList from './email-list';
 // const { TabPane } = Tabs;
 const EMAIL_PANELS = [
   { NAME: 'Inbox', KEY: '1', ICON: 'inbox', type: 'warning' },
-  { NAME: 'Send Mail', KEY: '2', ICON: 'mail' },
+  { NAME: 'Sent', KEY: '2', ICON: 'mail' },
   { NAME: 'Important', KEY: '2', ICON: 'star', theme: 'filled' },
   { NAME: 'Drafts', KEY: '2', ICON: 'file-text' },
   { NAME: 'Trash', KEY: '3', ICON: 'delete' },
