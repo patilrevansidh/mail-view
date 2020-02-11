@@ -13,6 +13,11 @@
   padding: 0.5rem;
 }
 
+.padding-horizantal-05rem {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .app-border {
   border: 1px solid $app-border-gray !important;
 }
@@ -41,4 +46,7 @@
 }
 .has-error {
   color: $app-red;
+}
+.no-padding {
+  padding: 0px !important;
 }

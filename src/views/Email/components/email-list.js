@@ -28,8 +28,8 @@ class EmailListView extends Component {
       <Col xs={6}>
         <span style={{ display: 'flex' }}>
           <DefaultButton className='margin-right-05rem' onClick={onBackRefresh}> {isDetail ? "Back" : "Refresh"} </DefaultButton>
-          <DefaultButton className='margin-right-05rem' onClick={this.handleDelete} icon='delete' size={CONSTANTS.DEFAULT} />
-          <DefaultButton className='margin-right-05rem' onClick={onMarkAsRead} icon='eye' size={CONSTANTS.DEFAULT} />
+          <DefaultButton className='margin-right-05rem padding-horizantal-05rem' onClick={this.handleDelete} icon='delete' size={CONSTANTS.DEFAULT} />
+          <DefaultButton className='margin-right-05rem padding-horizantal-05rem' onClick={onMarkAsRead} icon='eye' size={CONSTANTS.DEFAULT} />
         </span>
       </Col>
     </Row>
